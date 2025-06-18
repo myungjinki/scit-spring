@@ -1,0 +1,31 @@
+/* 상단 네비게이션 메뉴 스타일 */
+header {
+    background-color: #333;
+    overflow: hidden;
+	/* 메뉴 가운데 정렬 */
+	--display: flex;				/* 자식 요소(a 태그들)를 가로로 나열 */
+	--justify-content: center;	/* 전체 너비 기준으로 가운데 정렬 */
+	--align-items: center;		/* 수직 정렬도 가운데로 (선택사항) */
+}
+
+header a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+header a:hover {
+    background-color: #575757;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
