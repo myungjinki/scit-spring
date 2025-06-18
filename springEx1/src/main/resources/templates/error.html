@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- templates 패키지에 error.html 이름으로 모든 에러페이지를 자동 매핑 -->
+	
+	<h1>죄송합니다</h1>
+	<p>문제가 지속되면 관리자에게 문의해주세요.</p>
+	<a th:href="@{/}">홈으로 돌아가기</a>
+	<p th:text=" '에러 코드:' + ${status}"></p>
+	<p th:text=" '에러 메시지:' +  ${error}"></p>
+</body>
+</html>

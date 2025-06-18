@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+</head>
+<body>
+
+	<h1>image.html</h1>
+	
+	<!-- 
+		절대 경로(Absolute Path)
+		/	루트 경로
+		
+		상대 경로(Relative path)
+		./	현재 디렉토리
+		../	상위 디렉토리
+	 -->
+	 
+	 <!-- server.servlet.context-path=/web1 때문에 문제가 발생 -->
+	<!-- context-path를 자동 반영하지 않음 -->
+	<a href="/web1">home1</a>
+	<a href="./">home2</a>
+	<!-- context-path를 자동 반영함 -->
+	<a th:href="@{/}">home3</a>
+	
+	<hr>
+	<img src="image/aaa.jpg">
+	<img src="/image/bbb.jpg"> <!-- 여기는 안나옴 -->
+	<img th:src="@{/image/bbb.jpg}">
+</body>
+</html>

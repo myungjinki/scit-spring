@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+</head>
+<body>
+
+	<h1>image2.html</h1>
+	
+	<p>상대경로: <img src="../image/aaa.jpg"></p>
+	<p>절대경로: <img src="/web1/image/aaa.jpg"></p>
+	<p>타임리프: <img th:src="@{/image/ccc.jpg}"></p>
+	
+</body>
+</html>
