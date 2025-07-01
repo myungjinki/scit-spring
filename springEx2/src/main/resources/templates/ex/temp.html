@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>폼 임시 저장</title>
+	<script>
+		window.onload = function () {
+			document.querySelector('#name').value
+				= sessionStorage.getItem("name") || "";
+			document.querySelector('#message').value
+				= sessionStorage.getItem("message") || "";
+			
+			// 입력 값 저장
+			document.querySelector('#name')
+					.addEventListener('input', function(e) {
+						sessionStorage.setItem("name", e.target.value);	
+					});
+			document.querySelector('#message')
+					.addEventListener('input', (e) => {
+						sessionStorage.setItem("message", e.target.value);	
+					});
+		}
+		
+	</script>
+</head>
+<body>
+
+	<h1>문의하기</h1>
+	
+	<form>
+		이름: <input type="text" id="name"><br>
+		메시지: <input type="text" id="message"><br>
+		<button type="submit">보내기</button>
+        <button type="button" id="saveTemp">임시저장</button>
+	</form>
+	
+	<!-- 
+    <script>
+            const nameInput = document.getElementById('name');
+            const messageInput = document.getElementById('message');
+            const saveButton = document.getElementById('saveTemp');
+
+            if (sessionStorage.getItem('savedName')) {
+                nameInput.value = sessionStorage.getItem('savedName');
+            }
+            if (sessionStorage.getItem('savedMessage')) {
+                messageInput.value = sessionStorage.getItem('savedMessage');
+            }
+
+            saveButton.addEventListener('click', function() {
+                const name = nameInput.value;
+                const message = messageInput.value;
+
+                sessionStorage.setItem('savedName', name);
+                sessionStorage.setItem('savedMessage', message);
+            });
+    </script>
+     -->
+</body>
+</html>

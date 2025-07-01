@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+		body {
+			background-color: #f9f9f9;
+			padding: 20px;
+		}
+		table {
+			width: 500px;
+			border-collapse: collapse;
+			margin-top: 15px;
+		}
+		table, th, td {
+			border: 1px solid #ccc;
+		}
+		th, td {
+			padding: 10px;
+			text-align: center;
+		}
+		th {
+			background-color: #f0f0f0;
+		}
+		.no-student {
+			color: gray;
+		}
+		.fail {
+			color: red;
+			font-weight: bold;
+		}
+		.pass {
+			color: green;
+		}
+	</style>
+</head>
+<body>
+	<h1 th:text="|학 생 목 록|"></h1>
+
+	<p class="no-students"
+		th:if="${studentList == null or studentList.isEmpty()}">
+		학생이 없습니다.
+	</p>
+	
+	<table th:if="${studentList != null and
+						!studentList.isEmpty()}">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>나이</th>
+				<th>핸드폰 번호</th>
+				<th>성적</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="student, status : ${studentList}">
+				<td th:text="${status.count}">순서</td>
+				<td th:text="${student.name}">이름</td>
+				<td th:text="${student.age}">나이</td>
+				<td th:text="${student.phone}">핸드폰</td>
+				<td th:text="${student.grade}"
+					th:class="${student.grade lt 60}
+							  ? 'pass' : 'fail'">점수</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

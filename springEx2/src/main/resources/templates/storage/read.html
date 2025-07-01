@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		window.onload = function() {
+			// 데이터 읽기
+			let code1 = localStorage.getItem('code');
+			let code2 = sessionStorage.getItem('code');
+			
+			let div1 = document.querySelector('#div1');
+			let div2 = document.querySelector('#div2');
+			
+			div1.innerHTML = code1;
+			div2.innerHTML = code2;
+			
+			let div3 = document.querySelector('#div3');
+			div3.innerHTML = '<marquee>안녕하세요</marquee>'
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+</body>
+</html>

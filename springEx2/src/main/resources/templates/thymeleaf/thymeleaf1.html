@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+	타임리프를 사용하기 위한 네임스페이스
+	- 네임스페이스는 이름 충돌을 방지하고 XML 문서 내에서 요소와 속성을
+	  고유하게 식별할 수 있도록 도와주는 XML 표준 속성.
+	  ex. xmlns:prefix="URI" 형식으로 사용
+	- prefix는 네임스페이스를 참조하는 접두사, URI는 고유 식별자
+ -->
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h1>Thymeleaf 문법</h1>
+	
+	<h4>* 값 출력</h4>
+	<p>[[${str}]]</p>
+	<p>[[${num}]]</p>
+	<p>[[${person}]]</p>
+	<p>[[${person.name}]]</p>
+	<p>[[${tag}]]</p>
+	<p>[[${url}]]</p>
+	
+	<hr>
+	<p th:text="${str}">테스트 문자열</p>
+	<p th:text="${#strings.defaultString(str1, '테스트 문자열')}"></p> <!-- #strings, #map, #list 등등 사용가능 -->
+	<p th:text="${#strings.defaultString(str, '테스트 문자열')}"></p> <!-- #strings, #map, #list 등등 사용가능 -->
+	<p><input type="text" th:value="${str}" ></p>
+	<p><span th:text="${num}">0000</span>원</p>
+	
+	<hr>
+	<h4>태그 출력</h4>
+	<!-- text: 문자열 형식으로 출력 -->
+	<p th:text="${tag}"></p>
+	<!-- utext: HTML 형식으로 출력 -->
+	<p th:utext="${tag}"></p>
+	
+	<hr>
+	<h4>* 연산자</h4>
+	<p>[[${num gt 0}]]</p> <!-- 비교 연산도 됨 -->
+	<p th:text="${num}">1000</p>
+	<!-- 산술연산자 : + - * / % -->
+	<p th:text="${num + 1}">1000</p>
+	<!-- 비교연산자 : < > <= >= == != , lt gt le ge eq ne -->
+	<p th:text="${num > 100}"></p>
+	<p th:text="${num gt 100}"></p>
+	<!-- 논리연산자 : and or not -->
+	<p th:text="${num ge 1 and num le 100}"></p>
+	
+	<hr>
+	<h4>경로 생성과 하이퍼링크</h4>
+	<p><a href="https://naver.com" th:href=" 'https://nate.com' ">네이버로 가기</a></p>
+	<p><a href="${url}" th:href="${url}">구글로 가기</a></p>
+	<!-- 경로 관련 -->
+	<p>절대경로 생성: [[@{/param/view1}]]</p>
+	<p><a th:href="@{/param/view1}">페이지 이동</a></p>
+	
+	<hr>
+	<h4>이미지 출력</h4>
+	<p><img src="" th:src="@{/image/ccc.jpg}" alt="불러온 이미지"></p>
+	
+	<hr>
+	<h4>객체 출력</h4>
+	<ul th:object="${person}">
+		<li th:text="*{name}">이름</li>
+		<li th:text="${person.phone}">핸드폰</li>
+	</ul>
+	
+	<hr>
+	<h4>변수 출력</h4>
+	<p th:text="${inum}"></p>
+	<p th:text="${dnum}"></p>
+	<p th:text="${dnum2}"></p>
+	<p th:text="${date}"></p>
+	
+	<hr>
+	<h4>숫자 포매팅</h4>
+	<p th:text="${#numbers.formatInteger(inum, 10)}"></p>
+	<p th:text="${#numbers.formatInteger(inum, 3, 'COMMA')}"></p>
+	<!-- dnum 이라는 숫자 값을 3자리마다 쉼표(,), 소수점은 점(.), 소수점 아래 2자리까지 출력 -->
+	<p th:text="${#numbers.formatDecimal(dnum, 3, 'COMMA', 2, 'POINT')}"></p>
+	<!-- dnum2 값을 백분률(%)로 변환하여 정수부는 최소 0자리, 소수부는 최대 2자리까지 출력 -->
+	<p th:text="${#numbers.formatPercent(dnum2, 0, 2)}"></p>
+	<p th:text="${#numbers.formatPercent(100000.555, 10, 1)}"></p>
+	
+	<h4>날짜 포매팅</h4>
+	<p th:text="${#dates.format(date, 'yyyy/MM/dd HH:mm')}"></p>
+	<p th:text="${#dates.format(date, 'yyyy/MMM/dd hh:mm')}"></p>
+	
+	<hr>
+	<h4>문자열</h4>
+	<p th:text="${str + 'abcd'}"></p>
+	<p th:text="|${str} s  s    dsfdsf asdfabs|"></p>
+	<!-- p태그는 공백을 하나로 만들기 때문에 여러개 를 만들고 싶다면, &nbsp를 사용하거나 <pre>태그를 사용 -->
+	<p th:text="str + 'abcd'">
+	
+	<h4>문자열 함수</h4>
+	<p th:text="${#strings.isEmpty(str)}">문자열 출력</p>
+	<p th:text="${#strings.substring(str, 1, 2)}">문자열 출력</p>
+	<p th:text="${values}">문자열 출력</p>
+	<p th:text="${#strings.listSplit(values, ',')}">문자열 출력</p>
+	<p th:text="${#strings.listSplit(values, ',')[0]}">문자열 출력</p>
+	
+	<hr>
+	<h4>조건문</h4>
+	<!-- if: 조건이 true면 -->
+	<div th:if="${str.equals('문자열')}">true인경우 보이는 부분</div>
+	<div th:if="${not str.equals('문자열')}">false인경우 보이는 부분</div>
+	<div th:if="${str == '문자열'}">==로 비교해서 true인경우 보이는 부분</div>
+	<!-- unless: 조건이 false면 -->
+	<div th:unless="${str == '문자열'}">==로 비교해서 false인 경우</div>
+	<span th:text="${str == '문자열' ? 'true' : 'false'}"></span>
+	
+	<hr>
+	<div th:switch="${num}">
+		<p th:case="100">num은 100입니다.</p>
+		<p th:case="200">num은 200입니다.</p>
+		<p th:case="*">num은 그 밖의 숫자입니다.</p>		
+	</div>
+</body>
+</html>

@@ -2,13 +2,17 @@ package net.dsa.web2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import net.dsa.web2.dto.Person;
+import net.dsa.web2.dto.PersonForm;
 
 @Controller
 @Slf4j
@@ -30,6 +34,7 @@ public class ParamController {
 	public String view3() {
 		return "param/view3";
 	}
+	
 	
 	@GetMapping("param1")
 	public String param1(
@@ -102,5 +107,32 @@ public class ParamController {
 		model.addAttribute("person", p);
 		
 		return "param/model";
+	}
+	
+	@GetMapping("view4")
+	public String view4(Model model) {
+		model.addAttribute("person", new PersonForm()); // 빈 PersonForm() 보내기
+		return "param/view4";
+	}
+	
+	@PostMapping("validation")
+	public String validation(
+		@Validated
+		@ModelAttribute("person") PersonForm personForm
+		, BindingResult result		// @Validated 뒤에 위치해야 함
+		) {
+		log.debug("validation log = personForm: {}", personForm);
+		log.debug("validation log = result: {}", result);
+		// 1. 어노테이션 기반 검증 후 에러가 하나라도 있으면 다시 view4로 감
+		if (result.hasErrors()) {
+			return "param/view4";
+		}
+		// 2. 추가적인 유효성 검사
+		if (personForm.getPhone().contains("-")) {
+			result.reject("SyntaxError", "전화번호 형식이 맞지 않습니다.");
+			return "param/view4";
+		}
+		log.debug("가입 성공");
+		return "redirect:/";
 	}
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		.form-group {
+			margin-bottom: 10px;
+			desplay: flex;
+		}
+		.form-group {
+			margin-right: 10px;
+		}
+		.error {
+			color: red;
+			font-ize: 0.9em;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>유효성 검사</h1>
+
+	<form action="validation" method="post" th:object="${person}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}"
+				th:text="${err}" class="error"></p>
+		</div>
+		<div class="form-group">
+			<label for="name">이름</label>
+			<input type="text" id="name" th:field="*{name}">
+			<span th:errors="*{name}" class="error"></span>
+		</div>
+		<div class="form-group">
+			<label for="age">나이</label>
+			<input type="number" id="age" th:field="*{age}">
+			<span th:errors="*{age}" class="error"></span>
+		</div>
+		<div class="form-group">
+			<label for="phone">핸드폰</label>
+			<input type="tel" id="phone" th:field="*{phone}">
+			<span th:errors="*{phone}" class="error"></span>
+		</div>
+		<input type="submit" value="전송">
+	</form>
+</body>
+</html>
