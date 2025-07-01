@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>HOME</title>
+</head>
+<body>
+	<!-- Fragment
+		- Thymeleaf에서 HTML의 특정 영역을 재사용할 수 있도록 정의하는 기능
+		
+		layout/header : templates.layout/header.html 에서 찾겠다
+		header 라는 이름의 fragment(Fragment 식별자) or header 태그
+	 -->
+	 <!-- 
+	 	예전에는 include를 사용했는데 이제는 insert를 사용하고
+	 	insert나 replace나 흡사하다.
+	  -->
+	<div th:replace="~{layout/header :: header}"></div>
+	
+	<h1>
+		<span th:if="${session.loginId != null}"
+			  th:text="|${session.loginId}님 |"></span>
+		홈페이지에 오신 것을 환영합니다.
+	</h1>
+</body>
+</html>

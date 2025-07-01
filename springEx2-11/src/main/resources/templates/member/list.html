@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>회원 목록</title>
+</head>
+<body>
+	<div th:replace="~{layout/header :: header}"></div>
+	
+	<h1>회원목록</h1>
+	
+	<p class="no-member"
+	   th:if="${memberList == null or memberList.isEmpty()}">
+	   회원이 없습니다.
+	</p>
+	
+	<table th:if="${memberList != null and !memberList.isEmpty()}">
+		<tr>
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>이름</th>
+			<th>전화번호</th>
+		</tr>
+		<tr th:each="member : ${memberList}">
+			<td th:text="${member.id}">id</td>
+			<td th:text="${member.pw}">pw</td>
+			<td th:text="${member.name}">name</td>
+			<td th:text="${member.phone}">phone</td>
+		</tr>
+	</table>
+</body>
+</html>

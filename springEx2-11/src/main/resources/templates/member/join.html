@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<script th:src="@{/js/join.js}"></script>
+</head>
+<body>
+	<div th:replace="~{layout/header :: header}"></div>
+	
+	<div class="container">
+		<h1>회원가입</h1>
+		
+		<!-- join 해도 member/join으로 요청한다. -->
+		<form th:action="@{join}" method="post">
+			<label for="id">아이디</label>
+			<input type="text" name="id" id="id">
+			<label for="pw1">비밀번호</label>
+			<input type="password" name="pw" id="pw1">
+			<label for="pw2">비밀번호 확인</label>
+			<input type="password" id="pw2">
+			<label for="name">이름</label>
+			<input type="text" name="name" id="name">
+			<label for="phone"></label>
+			<input type="tel" name="phone" id="phone">
+			
+			<input type="submit" value="가입">
+		</form>
+	</div>
+</body>
+</html>
