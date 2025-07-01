@@ -1,0 +1,17 @@
+create table member3 (
+	id		varchar(30)		primary key,
+	pw		varchar(50),
+	name	varchar(100),
+	phone	varchar(20),
+	address	varchar(200)
+);
+
+select * from member3;
+
+-- 여러 쿼리 실행 alt + x
+insert into member3 values('aaa', '111', '홍길동', '111', '무역협회');
+insert into member3 values('bbb', '111', '강감찬', '222', '무역협회');
+insert into member3 values('ccc', '111', '이순신', '333', '무역협회');
+insert into member3 values('ddd', '111', '곽재우', '444', '무역협회');
+
+commit;
