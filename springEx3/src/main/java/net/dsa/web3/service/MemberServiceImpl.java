@@ -181,4 +181,19 @@ public class MemberServiceImpl implements MemberService {
 			return true;
 		return false;
 	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void updateMember(MemberDTO memberOld, MemberDTO memberNew) {
+		MemberEntity member = mr.findById(memberOld.getId())
+				.orElseThrow(() -> new EntityNotFoundException("없는 ID"));
+		
+		member.setPw(memberNew.getPw());
+		member.setName(memberNew.getName());
+		member.setPhone(memberNew.getPhone());
+		member.setAddress(memberNew.getAddress());
+		mr.save(member);
+	}
 }

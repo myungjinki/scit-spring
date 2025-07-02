@@ -19,6 +19,9 @@ public interface MemberService {
 	void save(MemberDTO member);
 
 	boolean loginCheck(String id, String pw);
+
+	void updateMember(MemberDTO memberOld, MemberDTO memberNew);
+
 	/**
 	 * BasicController
 	 */
