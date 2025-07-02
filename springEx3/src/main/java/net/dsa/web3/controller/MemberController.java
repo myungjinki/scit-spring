@@ -123,15 +123,4 @@ public class MemberController {
 		
 		return "member/updateForm";
 	}
-	
-	@PostMapping("update")
-	public String update(HttpSession session,
-						MemberDTO memberNew) {
-		String id = (String) session.getAttribute("loginId");
-		MemberDTO memberOld = ms.selectData(id);
-		log.debug("현재 접속 중인 유저의 회원정보: {}", memberOld);
-		
-		ms.updateMember(memberOld, memberNew);
-		return "redirect:/";
-	}
 }
