@@ -10,6 +10,26 @@
 	<h3>JPA를 활용한 DB연동</h3>
 	<ul>
 		<li><a th:href="@{basic/insertData}">데이터 저장</a></li>
+		<li><a th:href="@{basic/selectData}">데이터 조회</a></li>
+		<li><a th:href="@{basic/updateData}">데이터 수정</a></li>
+		<li><a th:href="@{basic/deleteData}">데이터 삭제</a></li>
+		<li><a th:href="@{basic/selectAllData}">전체 조회</a></li>
+	</ul>
+	
+	<h3>기본적인 회원정보 입출력</h3>
+	<ul>
+		<li th:if="${session.loginId == null}">
+			<a th:href="@{member/join}" th:text="회원가입"></a>
+		</li>
+		<li th:if="${session.loginId == null}">
+			<a th:href="@{member/login}" th:text="로그인"></a>
+		</li>
+		<li th:if="${session.loginId != null}">
+			<a th:href="@{member/logout}" th:text="로그아웃"></a>
+		</li>
+		<li th:if="${session.loginId != null}">
+			<a th:href="@{member/update}" th:text="회원정보수정"></a>			
+		</li>
 	</ul>
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		th { text-align: left;		}
+		td { text-align: cencter;	}
+	</style>
+	<script>
+		function check() {
+			let id = document.querySelector('#id');
+			let pw = document.querySelector('#pw');
+			let name = document.querySelector('#name');
+			
+			if (id.value.length < 3 || id.value.length > 10) {
+				alert('id는 3~10자로 작성해주세요.');
+				id.focus();
+				id.select();
+				return false;
+			}
+			if (pw.value.length < 3 || pw.value.length > 10) {
+				alert('id는 3~10자로 작성해주세요.');
+				pw.focus();
+				pw.select();
+				return false;
+			}
+			if (name.value == '') {
+				alert('이름을 입력해 주세요');
+				name.focus();
+				name.select();
+				return false;
+			}
+			return true;
+		}
+	</script>
+</head>
+<body>
+
+	<h1>회원가입</h1>
+	
+	<form th:action="@{/member/join}" method="post"
+		  onsubmit="return check();">
+		<table>
+			<tr>
+				<th>ID</th>
+				<td>
+					<input type="text" name="id" id="id" placeholder="3~10자 사이">
+				</td>
+			</tr>
+			<tr>
+				<th>PW</th>
+				<td>
+					<input type="password" name="pw" id="pw" placeholder="3~10자 사이">
+				</td>
+			</tr>
+			<tr>
+				<th>NAME</th>
+				<td>
+					<input type="text" name="name" id="name" placeholder="null 안됌">
+				</td>
+			</tr>
+			<tr>
+				<th>PHONE</th>
+				<td>
+					<input type="tel" name="phone">
+				</td>
+			</tr>
+			<tr>
+				<th>ADDRESS</th>
+				<td>
+					<input type="text" name="address">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="가입">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
