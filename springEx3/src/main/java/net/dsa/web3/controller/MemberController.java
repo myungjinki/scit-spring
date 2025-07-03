@@ -137,4 +137,35 @@ public class MemberController {
 		ms.save(member);
 		return "redirect:/";
 	}
+	
+	/**
+	 *  회원정보 조회
+	 *  @return ID 입력 페이지
+	 */
+	@GetMapping("select")
+	public String select() {
+		return "member/selectForm";
+	}
+	
+	/**
+	 * 검색폼에서 입력한 아이디를 전달받아 회원정보 조회
+	 * @param id	조회할 아이디
+	 * @param model
+	 * @return select.html
+	 */
+	@PostMapping("select")
+	public String select2(
+			@RequestParam("id") String id,
+			Model model
+			) {
+		
+		if (id != null) {
+			MemberDTO member = ms.selectData(id);			
+			log.debug("회원조회: {}", member);
+			model.addAttribute("searchId", id); // 못찾을 때 사용
+			model.addAttribute("member", member); // 찾으면 member 못찾으면 null
+		}
+		
+		return "member/select";
+	}
 }

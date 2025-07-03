@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>조회</title>
+</head>
+<body>
+	<h2>[ ID 조회 ]</h2>
+	
+	<div th:if="${member == null}">
+		<span th:if="${searchId != null}"
+			  th:text="|${searchID}: 없는 회원입니다.|"></span>
+		없는 회원입니다.
+	</div>
+	<div th:if="${member != null}">
+		<p>ID : <span th:text="${member.id}"></span></p>
+		<p>이름 : <span th:text="${member.name}"></span></p>
+		<p>핸드폰 : <span th:text="${member.phone}"></span></p>
+	</div>
+	
+</body>
+</html>
