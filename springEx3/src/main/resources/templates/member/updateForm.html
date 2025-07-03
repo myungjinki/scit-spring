@@ -37,14 +37,15 @@
 </head>
 <body>
 	<h2>회원정보수정</h2>
+	<p th:if="${member == null}" th:text="|회원정보가 없습니다.|"></p>
 	
 	<form th:action="@{/member/update}" method="post" onsubmit="return check();">
-		<table>
+		<table th:if="${member != null}">
 			<tr>
 				<th>ID</th>
 				<td>
 					<input type="text" name="id" id="id"
-						   th:value="${member.id}">
+						   th:value="${member.id}" readonly>
 				</td>
 			</tr>
 			<tr>

@@ -20,8 +20,6 @@ public interface MemberService {
 
 	boolean loginCheck(String id, String pw);
 
-	void updateMember(MemberDTO memberOld, MemberDTO memberNew);
-
 	/**
 	 * BasicController
 	 */

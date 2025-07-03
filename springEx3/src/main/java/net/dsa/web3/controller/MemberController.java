@@ -116,22 +116,25 @@ public class MemberController {
 							Model model) {
 		
 		String id = (String) session.getAttribute("loginId");
-		MemberDTO member = ms.selectData(id);
-		log.debug("현재 접속 중인 유저의 회원정보: {}", member);
-		model.addAttribute("member", member);
 		
+		// URL 직접 입력하는 경우
+		if (id != null) {
+			MemberDTO member = ms.selectData(id);
+			log.debug("현재 접속 중인 유저의 회원정보: {}", member);
+			model.addAttribute("member", member);			
+		}
 		
 		return "member/updateForm";
 	}
 	
+	/**
+	 * 회원정보 수정 처리
+	 * @param MemberDTO
+	 * @return 메인페이지이동
+	 */
 	@PostMapping("update")
-	public String update(HttpSession session,
-						MemberDTO memberNew) {
-		String id = (String) session.getAttribute("loginId");
-		MemberDTO memberOld = ms.selectData(id);
-		log.debug("현재 접속 중인 유저의 회원정보: {}", memberOld);
-		
-		ms.updateMember(memberOld, memberNew);
+	public String update(MemberDTO member) {
+		ms.save(member);
 		return "redirect:/";
 	}
 }
