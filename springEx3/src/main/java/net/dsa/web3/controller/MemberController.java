@@ -3,6 +3,7 @@ package net.dsa.web3.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -166,6 +167,35 @@ public class MemberController {
 			model.addAttribute("member", member); // 찾으면 member 못찾으면 null
 		}
 		
+		return "member/select";
+	}
+	
+	/**
+	 * URL 로부터 들어온 요청을 처리하는 메서드
+	 * http://localhost:9993/web/member/info/abc
+	 * @param id 조회할 아이디
+	 * @param model
+	 * @return select.html
+	 */
+	@GetMapping({"info" + "/{id}", "info"})
+	public String info(
+			@PathVariable(name = "id", required = false) String id, // required = false라면 없을때 null
+			Model model
+		) {
+		/*
+			@PathVariable
+			URL 경로 자체에 포함된 값을 파라미터로 받아오는 방식
+				@RequestParam	/member?id=abc&pw=123	쿼리스트링
+				@PathVariable	/member/abc				경로 변수
+		 */
+		
+		log.debug("경로 변수: {}", id);
+		if (id != null) {
+			MemberDTO member = ms.selectData(id);			
+			log.debug("회원조회: {}", member);
+			model.addAttribute("searchId", id); // 못찾을 때 사용
+			model.addAttribute("member", member); // 찾으면 member 못찾으면 null
+		}
 		return "member/select";
 	}
 }

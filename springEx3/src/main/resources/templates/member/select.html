@@ -9,7 +9,7 @@
 	
 	<div th:if="${member == null}">
 		<span th:if="${searchId != null}"
-			  th:text="|${searchID}: 없는 회원입니다.|"></span>
+			  th:text="|${searchId} : |"></span>
 		없는 회원입니다.
 	</div>
 	<div th:if="${member != null}">
