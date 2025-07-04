@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+	width: 100vw;
+}
+
+header {
+	display: flex;
+	justify-content: end;
+	margin: 24px;
+}
+
+header > a {
+	color: red;
+	font-size: 32px;
+	text-decoration: none;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.2rem;
+}
+
+table {
+		border: 1px solid black;
+		border-collapse: collapse;
+}
+th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 100px;
+	height: 50px;
+	text-align: center;
+}
+th {
+	background-color: beige;
+}
+
+form table th {
+	width: 160px;
+}
+form table td {
+	width: 320px;
+}
