@@ -1,5 +1,7 @@
 package net.dsa.web3.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -197,5 +199,37 @@ public class MemberController {
 			model.addAttribute("member", member); // 찾으면 member 못찾으면 null
 		}
 		return "member/select";
+	}
+	
+	/**
+	 * 회원목록 조회
+	 * @param Model
+	 * @return list.html
+	 */
+	@GetMapping("list")
+	public String list(Model model) {
+		
+		// 회원목록 전체 조회
+		List<MemberDTO>	memberList = ms.selectAllData();
+		log.debug("회원정보 전체조회: {}", memberList);
+		
+		model.addAttribute("memberList", memberList);
+		
+		return "member/list";
+	}
+	
+	/**
+	 * 회원정보 삭제 처리
+	 * @param id	삭제할 id
+	 * @return list.html
+	 */
+	@GetMapping("delete")
+	public String delete(@RequestParam(name = "id") String id) {
+		log.debug("삭제할 id: {}", id);
+		
+		ms.deleteData(id);
+		
+		// redirect를 하는 이유는 /member/list 컨트롤러의 로직을 다시 실행하기 위함
+		return "redirect:/member/list";
 	}
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>회원목록</title>
+	<style>
+		table {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			width: 100px;
+			height: 50px;
+			text-align: center;
+		}
+		th {
+			background-color: beige;
+		}
+	</style>
+	<script>
+		function deleteFunc(param, e) {
+			console.log('param: ', param);
+			
+			const tId = e.target.getAttribute('data-tid');
+			const tId2 = e.target.dataset.tid;
+			
+			console.log(tId, tId2);
+			
+			let result = confirm('정말 삭제하시겠습니까?');
+			if (result) {
+				location.href = 'delete?id=' + param;
+			}
+		}
+	</script>
+</head>
+<body>
+	<h2>[ 회원목록 ]</h2>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>NAME</th>
+			<th style="width: 200px;">PHONE</th>
+			<th style="width: 400px;">ADDRESS</th>
+			<th>Delete</th>
+		</tr>
+		<tr th:each="member : ${memberList}">
+			<td th:text="${member.id}"></td>
+			<td th:text="${member.name}"></td>
+			<td th:text="${member.phone}"></td>
+			<td th:text="${member.address}"></td>
+			<td>
+				<!-- 쿼리스트링을 타임리프 표현식으로 작성 -->
+				<!-- <a th:href="@{ 경로( 파라미터명1=${값1}, 파라미터명2=${값2} ) }">링크</a> -->
+				<a th:href="@{/member/delete(id=${member.id})}" th:text="삭제1"></a>
+				<!-- 사용자 정의 데이터를 추가할 때 data-* 속성을 사용 -->
+				<!-- 속성 이름은 반드시 data- 로 시작해야 함. -->
+				<input type="button" value="삭제2" id="btn"
+					   th:attr="data-tid=${member.id}"
+					   th:onclick="deleteFunc(this.getAttribute('data-tid'), event)">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

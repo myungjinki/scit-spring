@@ -30,6 +30,12 @@
 		<li th:if="${session.loginId != null}">
 			<a th:href="@{member/update}" th:text="회원정보수정"></a>			
 		</li>
+		<li th:if="${session.loginId != null}">
+			<a th:href="@{member/select}" th:text="회원정보조회"></a>			
+		</li>
+		<li>
+			<a th:href="@{member/list}" th:text="회원목록"></a>			
+		</li>
 	</ul>
 </body>
 </html>
