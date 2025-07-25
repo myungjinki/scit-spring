@@ -1,0 +1,164 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+body {
+    background-image : url('../image/perfume.png');
+    background-repeat: round;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    margin: 40px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    padding: 12px 28px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #333;
+    font-weight: 700;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #4b89dc;
+}
+
+.highlighted-section {
+    background-color: #eef4ff;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #c9dfff;
+}
+
+.highlighted-section label {
+    font-weight: 700;
+}
+
+.highlighted-section select {
+    margin-bottom: 0;
+    border-color: #4b89dc;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.radio-group label {
+    font-weight: 400;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #555;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+button, a.result-btn {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn {
+    background: #4b89dc;
+}
+
+.submit-btn:hover {
+    background: #3a79cc;
+}
+
+.result-btn {
+    background: #888;
+}
+
+.result-btn:hover {
+    background: #777;
+}
+
+#name-label {
+    color: #ff6464;
+}
+
+#gender-label {
+    color: #ffa644;
+}
+
+#age-label {
+    color: #f4fe7a;
+}
+
+#scent-label {
+    color: #a7f473;
+}
+
+#frequency-label {
+    color: #7bdbff;
+}
+
+#brand-label {
+    color: #ae94e4;
+}
+
+#budget-label {
+    color: #ff80c2;
+}
+
+#comment-label {
+    color: skyblue;
+}

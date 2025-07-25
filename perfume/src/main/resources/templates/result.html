@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>향수 설문 결과</title>
+   	<link rel="stylesheet" th:href="@{/css/result.css}">
+</head>
+<body>
+    <div class="title">향수 설문조사 결과</div>
+    <div class="subtitle">
+        응답자(
+        <span class="female" th:text="'여 ' + ${femaleCount}"></span>
+        <span class="male" th:text="'남 ' + ${maleCount}"></span>
+        )
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>선호 향기</th>
+                <th>사용 빈도</th>
+                <th>선호 브랜드</th>
+                <th>구매 예산</th>
+                <th>추가 의견</th>
+                <th>설문 시간</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="perfume : ${perfumeList}">
+                <td th:text="${perfume.name}" class="name"
+                    th:classappend="${perfume.gender} == '여성' ? 'female-name' : ''"></td>
+                <td th:text="${perfume.age}"></td>
+                <td th:text="${perfume.favoriteScent}"></td>
+                <td th:text="${perfume.usageFrequency}"></td>
+                <td th:text="${perfume.favoriteBrand}"></td>
+                <td th:text="${perfume.purchaseBudget}"></td>
+                <td th:text="${perfume.comments}"></td>
+                <td th:text="${#temporals.format(perfume.completionTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

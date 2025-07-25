@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+body {
+    background-image : url('../image/perfume.png');
+    background-repeat: round;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.title {
+    text-align: center;
+    font-size: 2em;
+    margin: 36px 0 18px 0;
+    color: #444;
+    font-weight: 700;
+}
+.subtitle {
+    text-align: left;
+    margin-left: 16%;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+.subtitle .female {
+    color: pink;
+    font-weight: 700;
+}
+.subtitle .male {
+    color: indigo;
+    font-weight: 700;
+}
+table {
+    width: 70%;
+    margin: 0 auto 40px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+th, td {
+    border: 1px solid #d1d1d1;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 1em;
+}
+th {
+    background: #f2f6fa;
+    font-weight: 700;
+}
+.name {
+	color: indigo;
+    font-weight: 700;
+}
+.female-name {
+    color: pink;
+}
