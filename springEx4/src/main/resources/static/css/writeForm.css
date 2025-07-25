@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/* 전체 페이지 스타일 */
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* 폼 컨테이너 스타일 */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 제목 스타일 */
+h2 {
+    color: #ff7e5f;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 폼 그룹 스타일 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* label 스타일 */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* 입력 필드 스타일 */
+input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* textarea 고정 높이 및 오버플로 처리 */
+textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #ff7e5f;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+button:hover {
+    background-color: #feb47b;
+}

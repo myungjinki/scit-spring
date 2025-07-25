@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>방명록</title>
+	<link rel="stylesheet" th:href="@{/css/guestList.css}">
+	<script>
+		window.onload = function() {
+
+			if ('[[${msg}]]') {
+				alert('[[${msg}]]');
+			}
+			
+			let h2 = document.querySelector('h2');
+			h2.addEventListener('click', function() {
+				location.href = '/web4';
+			});
+			
+			// 모든 item 요소를 가져오기
+			let items = document.querySelectorAll('.item');
+			
+			// 각 item에 랜덤 색상 적용하기
+			items.forEach(item => {
+				item.style.backgroundColor = getRandom();
+			});
+		}
+		
+		function getRandom() {
+			// #색상코드 , rgb() , rgba()
+			const r = Math.floor(Math.random() * 256);	//red
+			const g = Math.floor(Math.random() * 256);	//green
+			const b = Math.floor(Math.random() * 256);	//blue
+			
+			// 투명도 0.1 ~ 0.3 정도의 투명도 설정
+			const alpha = (Math.random() * 0.2 + 0.1).toFixed(2);
+			
+			return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+		}
+	</script>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="top">
+			<h2>방명록</h2>
+			<a th:href="@{write}">
+				<img th:src="@{/images/icon_write.png}">
+			</a>
+		</div>
+		<div class="items">
+			<div th:each="guest : ${guestList}" class="item">
+				<p>
+					<label>글번호</label>
+					<span th:text="${guest.num}"></span>
+					<label>작성자</label>
+					<span th:text="${guest.name}"></span>
+				</p>
+				<p>
+					<label>작성일</label>
+					<span th:text="${#temporals.format(guest.inputdate,
+									'yyyy-MM-dd HH:mm:ss')}"></span>
+				</p>
+				<textarea rows="4" cols="30"
+						  th:text="${guest.message}"></textarea>
+				<form th:action="@{delete}" method="post">
+					<input type="hidden" name="num" th:value="${guest.num}">
+					<input type="password" name="password"
+						   placeholder="비밀번호를 입력하세요..">
+					<input type="submit" value="삭제">
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
