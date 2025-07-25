@@ -1,0 +1,14 @@
+CREATE TABLE chicken_order (
+    id 					INTEGER 		AUTO_INCREMENT PRIMARY KEY,		-- PK
+    chicken_type 		VARCHAR(50)		NOT NULL,						-- 치킨 종류
+    chicken_price 		INT				DEFAULT 0,						-- 치킨 가격
+    quantity 			INT				DEFAULT 0,						-- 수량
+    extra_options 		VARCHAR(255)	DEFAULT '없음',					-- 추가 옵션
+    extra_total_price 	INT				DEFAULT 0,						-- 추가 옵션 가격
+    delivery_type 		VARCHAR(50)		DEFAULT '알뜰배달 (무료)',			-- 배달 종류
+    delivery_price 		INT				DEFAULT 0,						-- 배달 비용
+    total_price 		INT				DEFAULT 0,						-- 총 결제 금액
+    order_date 			TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP		-- 주문 시간
+);
+use springjpa;
+select * from chicken_order;

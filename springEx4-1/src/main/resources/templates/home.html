@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>치킨 주문</title>
+	<script th:src="@{/js/order_js.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/order_style.css}">
+</head>
+<body>
+	<div class="order-container">
+		<h1>치킨 주문하기</h1>
+		
+		<!-- 치킨 종류 -->
+		<div class="input-group">
+			<label for="chickenType">치킨 종류:</label>
+			<select id="chickenType" required>
+				<option value="">-- 치킨 종류를 선택하세요 --</option>
+				<option value="18000">후라이드 치킨 (18,000원)</option>
+				<option value="19000">양념 치킨 (19,000원)</option>
+				<option value="20000">반반 치킨 (20,000원)</option>
+			</select>
+		</div>
+		
+		<!-- 수량 -->
+		<div class="input-group">
+			<label for="quantity">수량:</label>
+			<input type="number" id="quantity" placeholder="1 이상" required>
+		</div>
+		
+		<!-- 추가 메뉴 -->
+		<div class="input-group">
+			<label>추가 메뉴:</label>
+			<div>
+				<input type="checkbox" name="extraOption" value="1000">
+				<label>무 추가 (+1,000원)</label>
+			</div>
+			<div>
+				<input type="checkbox" name="extraOption" value="2000">
+				<label>콜라 추가 (+2,000원)</label>
+			</div>
+			<div>
+				<input type="checkbox" name="extraOption" value="3000">
+				<label>감자튀김 (+3,000원)</label>
+			</div>
+			<div>
+				<input type="checkbox" name="extraOption" value="4000">
+				<label>소떡소떡 (+4,000원)</label>
+			</div>
+		</div>
+		
+		<!-- 배달 방식 -->
+		<div class="input-group">
+			<label>배달 방식:</label>
+			<div>
+				<input type="radio" name="deliveryType" value="0" checked>
+				<label>알뜰배달 (무료)</label>
+			</div>
+			<div>
+				<input type="radio" name="deliveryType" value="1000">
+				<label>한집배달 (+1,000원)</label>
+			</div>
+		</div>
+		
+		<!-- 주문 폼 -->
+		<form id="orderForm" th:action="@{/order}" method="post">
+			<input type="hidden" name="chickenType">
+			<input type="hidden" name="chickenPrice">
+			<input type="hidden" name="quantity">
+			<input type="hidden" name="extraOptions">
+			<input type="hidden" name="extraTotalPrice">
+			<input type="hidden" name="deliveryType">
+			<input type="hidden" name="deliveryPrice">
+			<input type="hidden" name="totalPrice">
+			<button type="button" onclick="orderFunc()">주문하기</button>
+		</form>
+		
+		<div id="error" class="error"></div>
+	</div>
+
+	<!-- 모달창 -->
+	<div class="modal" id="receiptModal" style="display:none;">
+		<div class="modal-content">
+		<button class="close" onclick="closeModal()">X</button>
+			<h2>주문 영수증</h2>
+			<div>
+				<strong>치킨 종류:</strong> 
+				<span id="receiptChickenType" class="order-contents"></span>
+			</div>
+			<div>
+				<strong>수량:</strong> 
+				<span id="receiptQuantity" class="order-contents"></span>
+			</div>
+			<div>
+				<strong>추가 메뉴:</strong> 
+				<div id="receiptExtras" class="order-contents"></div>
+			</div>
+			<div>
+				<strong>배달 방식:</strong> 
+				<span id="receiptDelivery" class="order-contents"></span>
+			</div>
+			<div>
+				<strong>총 결제 금액:</strong> 
+				<span id="receiptTotal" class="order-contents"></span>
+			</div>
+			<br>
+			<button type="submit" form="orderForm">주문확정</button>
+		</div>
+	</div>
+</body>
+</html>
