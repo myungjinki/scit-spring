@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>개인정보 수정</title>
+<link rel="stylesheet" th:href="@{/css/main.css}">
+	<script>
+		window.onload = function(){
+			document.querySelector('#updateForm')
+						.addEventListener('submit', validation);
+		}
+		function validation(e){
+			const id = document.querySelector('memberId').value;
+			const pw = document.querySelectrt('memberPassword').value;
+			const pw2 = document.querySelectrt('memberPassword2').value;
+			const name = document.querySelectrt('memberName').value;
+			
+			if (id.length < 3 || id.length > 10) {
+				alert("ID는 3~10자로 입력하세요.");
+				e.preventDefault();
+				return;
+			}
+			if (pw.length < 3 || pw.length > 10) {
+				alert('비밀번호는 3~10자로 입력하세요.')
+				e.preventDefault();
+				return;
+			}
+			if (pw != pw2) {
+				alert('비밀번호를 정확하게 입력하세요.')
+				e.preventDefault();
+				return;
+			}
+			if(!name) {
+				alert('이름을 입력하새요')
+				e.preventDefault();
+				return;
+			}
+		}
+		
+		// ID 중복 화인창
+		function idWindowOpen() {
+			// 팝업창 (열고자 하는 페이지의 URL, 새 창의 이름, 새 창의 위치 및 크기)
+			let w = window.open('idCheck'
+					, 'idwin'
+					, 'top=200,left=500,width=400,height=300');
+		}
+	</script>
+</head>
+<body>
+
+	<header>
+		<h1>[ 개인정보 수정 ]</h1>
+	</header>
+
+	<section><form id="updateForm" th:action="@{/member/update}" method="post">
+			<table>
+				<tr>
+					<th>ID</th>
+					<td th:text="${member.memberId}"></td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td>
+						<input type="password" name="memberPassword"
+						id="memberPassword" placeholder="비밀번호 입력">
+						<br>
+						<input type="password" id="memberPassword2" placeholder="비밀번호 다시 입력">
+					</td>
+				</tr>
+				<tr>
+					<th>이름</th>
+					<td>
+						<input type="text" name="memberName" id="memberName"
+						th:value="${member.memberName}">
+					</td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td>
+						<input type="text" name="email" id="email"
+						th:value="${member.email}">
+					</td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td>
+						<input type="text" name="phone" th:value="${member.phone}">
+					</td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td>
+						<input type="text" name="address" th:value="${member.address}" style="width: 300px">
+					</td>
+				</tr>
+			</table>
+			<br>
+			<button type="submit">수정</button>
+			<button type="reset">다시쓰기</button>
+		</form>
+	</section>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>writeForm</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<script>
+    	window.onload = function () {
+    	document.querySelector('#writeForm')
+              .addEventListener('submit', function (e) {
+                const title = document.querySelector('#title');
+                const contents = document.querySelector('#contents');
+
+                if (title.value.length < 5) {
+                  alert('제목을 5자 이상 입력하세요.');
+                  title.focus();
+                  title.select();
+                  e.preventDefault();
+                  return;
+                }
+
+                if (contents.value.length < 5) {
+                  alert('내용을 5자 이상 입력하세요.');
+                  contents.focus();
+                  contents.select();
+                  e.preventDefault();
+                  return;
+                }
+		});
+    }
+	</script>
+</head>
+<body>
+  <header>
+    <h1>[ 글쓰기 ]</h1>
+  </header>
+  <section>
+    <!--
+        enctype="multipart/form-data"
+        - <form>태그에서 파일 전송을 가능하게 해주는 속성
+        - 여러 종류의 데이터(일반 데이터(text) + 파일(binary))
+        - 를 하나의 HTTP 요청에 함께 전송할 수 있도록 된 특수한 인코딩 방식
+    -->
+    <form id="writeForm" th:action="@{/board/write}"
+          method="post" enctype="multipart/form-data">
+      <table>
+        <tr>
+          <th>제목</th>
+          <td>
+            <input type="text" name="title" id="title" style="width: 400px;">
+          </td>
+        </tr>
+        <tr>
+          <th>내용</th>
+          <td>
+            <textarea name="contents" id="contents"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th>파일첨부</th>
+          <td>
+            <input type="file" id="upload" name="upload">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="white center">
+            <button type="submit">저장</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </section>
+</body>
+</html>

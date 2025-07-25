@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring=security">
+	  <script>
+	  	function updateToggle(id){
+	  		let result = confirm('변경하시나요');
+	  		if(result){
+	  			location.href = `update?id=${id}`;
+	  		}
+	  	}
+	  	function enabledToggle(id, enabled){
+	  		let result = enabled === "true" ? "비활성화" : "활성화";
+	  		if(confirm(`정말 ${result} 하나요?`)){
+	  			location.href = `enabled?id=${id}&enabled=${enabled}`;
+	  		}
+	  	}
+	  </script>
+<head>
+	<meta charset="UTF-8">
+	<title>회원 목록</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+	<header>
+	<h1>[ 회원 목록 ]</h1>
+	</header>
+	<section sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+	<table>
+		<caption sec:authorize="isAuthenticated()" th:text="|${#authentication.name}님 로그인중|"
+		style="text-align: left">
+		</caption>
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>Email</td>
+			<td>Phone</td>
+			<td>Address</td>
+			<td>RoleName</td>
+			<td>Enabled</td>
+			<td>etc..</td>
+		</tr>
+		<tr th:each="m : ${memberList}"
+			th:if="${m.memberId} != ${#authentication.name}">
+			<td th:text="${m.memberId}">ID</td>
+			<td th:text="${m.memberName}">NAME</td>
+			<td th:text="${m.email}">Email</td>
+			<td th:text="${m.phone}">Phone</td>
+			<td th:text="${m.address}">Address</td>
+			<td th:text="${m.rolename}">RoleName</td>
+			<td th:text="${m.enabled}">Enabled</td>
+			<td>
+				<input type="button" value="권한변경"
+					th:attr="data-id=${m.memberId}"
+					onclick="updateToggle(this.getAttribute('data-id'));">
+				<input type="button"
+					   th:value="${m.enabled} ? '비활성화' : '활성화'"
+					   th:attr="data-id=${m.memberId}, data-enabled=${m.enabled}"
+					   onclick="enabledToggle(this.getAttribute('data-id'), this.getAttribute('data-enabled'))">
+			</td>
+		</tr>
+	</table>
+	</section>
+</body>
+</html>
